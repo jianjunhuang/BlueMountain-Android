@@ -1,6 +1,7 @@
 package com.jianjunhuang.bluemountain.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import com.demo.jianjunhuang.mvptools.adapter.RecyclerAdapter;
 import com.demo.jianjunhuang.mvptools.adapter.RecyclerViewHolder;
 import com.demo.jianjunhuang.mvptools.integration.BaseFragment;
 import com.jianjunhuang.bluemountain.R;
+import com.jianjunhuang.bluemountain.view.activity.CommunityAddActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,13 @@ public class CommunityFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
+        addFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CommunityAddActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     class CommunityAdapter extends RecyclerAdapter<String> {
