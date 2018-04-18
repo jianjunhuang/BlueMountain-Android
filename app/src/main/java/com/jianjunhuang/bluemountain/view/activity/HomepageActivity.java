@@ -1,11 +1,13 @@
 package com.jianjunhuang.bluemountain.view.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.demo.jianjunhuang.mvptools.integration.BaseActivity;
 import com.jianjunhuang.bluemountain.R;
@@ -73,4 +75,11 @@ public class HomepageActivity extends BaseActivity {
             return list.size();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private static final String TAG = "HomepageActivity";
 }
