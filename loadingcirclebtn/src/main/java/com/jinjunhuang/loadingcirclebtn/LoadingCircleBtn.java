@@ -122,7 +122,7 @@ public class LoadingCircleBtn extends View {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         defaultPaint.setColor(mColor);
         mDefaultBmp = BitmapFactory.decodeResource(getResources(), mDefaultDrawable);
-        defaultPaint.setShadowLayer(5, 0, 5, Color.LTGRAY);
+        defaultPaint.setShadowLayer(5, 0, 5, Color.parseColor("#412d26"));
 
         loadingPaint.setColor(mLoadingProgressColor);
         loadingPaint.setStyle(Paint.Style.STROKE);

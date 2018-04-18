@@ -16,6 +16,7 @@ import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.jianjunhuang.bluemountain.R;
 import com.jianjunhuang.bluemountain.model.bean.CoffeUserBean;
 import com.jianjunhuang.bluemountain.utils.CheckPermissionUtils;
+import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -83,6 +84,9 @@ public class CoffeeFragment extends BaseFragment {
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     ToastUtils.show(result);
+                    //TODO check the result is the machineId
+                    Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                    startActivity(intent);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     ToastUtils.show("解析失败");
                 }

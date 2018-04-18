@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.CommunityAddActivity" />
+        <activity android:name=".view.activity.ConnectActivity" />
     </application>
 
 </manifest>
