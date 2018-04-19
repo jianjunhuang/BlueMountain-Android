@@ -61,13 +61,15 @@ public class CoffeeFragment extends BaseFragment {
         coffeeInfoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] permissions = CheckPermissionUtils.checkPermission(getContext());
-                if (permissions.length == 0) {
-                    Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                    startActivityForResult(intent, 200);
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
-                }
+//                String[] permissions = CheckPermissionUtils.checkPermission(getContext());
+//                if (permissions.length == 0) {
+//                    Intent intent = new Intent(getActivity(), CaptureActivity.class);
+//                    startActivityForResult(intent, 200);
+//                } else {
+//                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
+//                }
+                Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                startActivity(intent);
             }
         });
     }
