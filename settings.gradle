@@ -1,1 +1,1 @@
-include ':app', ':loadingcirclebtn', ':mvptools',':esptouch'
+include ':app', ':loadingcirclebtn', ':mvptools',':esptouch','waveview'
