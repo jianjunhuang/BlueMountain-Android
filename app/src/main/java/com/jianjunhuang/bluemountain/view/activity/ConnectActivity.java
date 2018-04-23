@@ -8,13 +8,10 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.demo.jianjunhuang.mvptools.integration.BaseActivity;
-import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchListener;
 import com.espressif.iot.esptouch.IEsptouchResult;
@@ -28,7 +25,7 @@ import java.util.List;
 
 public class ConnectActivity extends BaseActivity {
 
-    private TextInputEditText userNameEdt;
+    private TextInputEditText emailEdt;
     private TextInputEditText wifiSsidEdt;
     private TextInputEditText wifiPwdEdt;
     private LoadingCircleBtn loadingCircleBtn;
@@ -49,7 +46,7 @@ public class ConnectActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        userNameEdt = findView(R.id.connect_user_name_edt);
+        emailEdt = findView(R.id.connect_email_edt);
         wifiSsidEdt = findView(R.id.connect_wifi_ssid_edt);
         wifiPwdEdt = findView(R.id.connect_wifi_pwd_edt);
         loadingCircleBtn = findView(R.id.connect_loading_circle_btn);
@@ -94,7 +91,7 @@ public class ConnectActivity extends BaseActivity {
     }
 
     private void enableEdt(boolean isEnable) {
-        userNameEdt.setEnabled(isEnable);
+        emailEdt.setEnabled(isEnable);
         wifiPwdEdt.setEnabled(isEnable);
     }
 

@@ -12,10 +12,10 @@
         android:textColorHint="@color/colorHint">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/connect_user_name_edt"
+            android:id="@+id/connect_email_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="user name"
+            android:hint="Email"
             android:padding="16dp"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorHint"
