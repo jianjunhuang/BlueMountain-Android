@@ -6,4 +6,6 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorHint">#b1b1b1</color>
     <color name="colorText">#ffffff</color>
+    <color name="colorRed">#f44336</color>
+    <color name="colorGreen">#86cb96</color>
 </resources>

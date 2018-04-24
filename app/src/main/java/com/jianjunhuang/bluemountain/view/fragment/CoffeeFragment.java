@@ -15,6 +15,7 @@ import com.jianjunhuang.bluemountain.R;
 import com.jianjunhuang.bluemountain.model.bean.CoffeUserBean;
 import com.jianjunhuang.bluemountain.utils.WaveHelper;
 import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
+import com.jianjunhuang.bluemountain.view.activity.LoginActivity;
 import com.jianjunhuang.lib.waveview.Wave;
 import com.jianjunhuang.lib.waveview.WaveView;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -93,7 +94,13 @@ public class CoffeeFragment extends BaseFragment {
 //                } else {
 //                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
 //                }
-                Intent intent = new Intent(getActivity(), ConnectActivity.class);
+
+                //jude if login
+                //no -> jump to login activity
+                //jude if connected
+                //no -> jump to connect activity
+
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });

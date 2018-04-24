@@ -9,16 +9,13 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:hint="User Name"
         android:textColorHint="@color/colorHint">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/connect_wifi_ssid_edt"
+            android:id="@+id/login_user_name_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:hint="wifi"
-            android:text="Tentcoo"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorHint"
             android:textSize="18sp" />
@@ -28,33 +25,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:hint="Password"
         android:textColorHint="@color/colorHint"
+        app:counterMaxLength="8"
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/connect_wifi_pwd_edt"
+            android:id="@+id/login_pwd_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
             android:inputType="textPassword"
+            android:maxLength="8"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorHint"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/login_ensure_pwd_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Ensure Password"
+        android:textColorHint="@color/colorHint"
+        android:visibility="gone"
+        app:counterMaxLength="8"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/login_ensure_pwd_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLength="8"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorHint"
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/connect_tips_tv"
+        android:id="@+id/login_tips_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="请确保手机与咖啡机处于同一 wifi 环境下"
-        android:textColor="@color/colorHint" />
+        android:textColor="@color/colorRed" />
 
     <com.jinjunhuang.loadingcirclebtn.LoadingCircleBtn
-        android:id="@+id/connect_loading_circle_btn"
+        android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        app:defaultDrawable="@drawable/ic_swap_horiz_white_24dp" />
+        app:defaultDrawable="@drawable/ic_keyboard_arrow_right_white_24dp" />
+
+
+    <Button
+        android:id="@+id/login_switch_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="8dp"
+        android:paddingLeft="8dp"
+        android:text="@string/sign_up"
+        android:textColor="@android:color/white" />
 </LinearLayout>
