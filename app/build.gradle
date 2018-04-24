@@ -32,4 +32,5 @@ dependencies {
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
     implementation project(':esptouch')
     implementation project(':waveview')
+    implementation 'com.google.code.gson:gson:2.8.2'
 }
