@@ -48,7 +48,7 @@ public class SmartConfigActivity extends BaseActivity {
         wifiSsidEdt = findView(R.id.smart_config_wifi_ssid_edt);
         wifiPwdEdt = findView(R.id.smart_config_wifi_pwd_edt);
         loadingCircleBtn = findView(R.id.smart_config_loading_circle_btn);
-        tipsTv = findView(R.id.connect_tips_tv);
+        tipsTv = findView(R.id.smart_config_tips_tv);
         mWifiAdmin = new EspWifiAdminSimple(this);
         IntentFilter filter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         registerReceiver(mReceiver, filter);

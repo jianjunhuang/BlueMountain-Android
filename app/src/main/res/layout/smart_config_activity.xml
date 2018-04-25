@@ -43,7 +43,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/connect_tips_tv"
+        android:id="@+id/smart_config_tips_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
