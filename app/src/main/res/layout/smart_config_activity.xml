@@ -13,7 +13,7 @@
         android:textColorHint="@color/colorHint">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/connect_wifi_ssid_edt"
+            android:id="@+id/smart_config_wifi_ssid_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -32,7 +32,7 @@
         app:passwordToggleEnabled="true">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/connect_wifi_pwd_edt"
+            android:id="@+id/smart_config_wifi_pwd_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
@@ -51,7 +51,7 @@
         android:textColor="@color/colorHint" />
 
     <com.jinjunhuang.loadingcirclebtn.LoadingCircleBtn
-        android:id="@+id/connect_loading_circle_btn"
+        android:id="@+id/smart_config_loading_circle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -23,9 +23,8 @@ import com.jinjunhuang.loadingcirclebtn.LoadingCircleBtn;
 
 import java.util.List;
 
-public class ConnectActivity extends BaseActivity {
+public class SmartConfigActivity extends BaseActivity {
 
-    private TextInputEditText emailEdt;
     private TextInputEditText wifiSsidEdt;
     private TextInputEditText wifiPwdEdt;
     private LoadingCircleBtn loadingCircleBtn;
@@ -41,15 +40,14 @@ public class ConnectActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.connect_activity;
+        return R.layout.smart_config_activity;
     }
 
     @Override
     protected void initView() {
-        emailEdt = findView(R.id.connect_email_edt);
-        wifiSsidEdt = findView(R.id.connect_wifi_ssid_edt);
-        wifiPwdEdt = findView(R.id.connect_wifi_pwd_edt);
-        loadingCircleBtn = findView(R.id.connect_loading_circle_btn);
+        wifiSsidEdt = findView(R.id.smart_config_wifi_ssid_edt);
+        wifiPwdEdt = findView(R.id.smart_config_wifi_pwd_edt);
+        loadingCircleBtn = findView(R.id.smart_config_loading_circle_btn);
         tipsTv = findView(R.id.connect_tips_tv);
         mWifiAdmin = new EspWifiAdminSimple(this);
         IntentFilter filter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -91,7 +89,6 @@ public class ConnectActivity extends BaseActivity {
     }
 
     private void enableEdt(boolean isEnable) {
-        emailEdt.setEnabled(isEnable);
         wifiPwdEdt.setEnabled(isEnable);
     }
 
@@ -150,9 +147,9 @@ public class ConnectActivity extends BaseActivity {
                 if (useAes) {
                     byte[] secretKey = "1234567890123456".getBytes();
                     EspAES aes = new EspAES(secretKey);
-                    esptouchTask = new EsptouchTask(apSsid, apBssid, apPsw, aes, ConnectActivity.this);
+                    esptouchTask = new EsptouchTask(apSsid, apBssid, apPsw, aes, SmartConfigActivity.this);
                 } else {
-                    esptouchTask = new EsptouchTask(apSsid, apBssid, apPsw, null, ConnectActivity.this);
+                    esptouchTask = new EsptouchTask(apSsid, apBssid, apPsw, null, SmartConfigActivity.this);
                 }
                 esptouchTask.setEsptouchListener(mListener);
             }
