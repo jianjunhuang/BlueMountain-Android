@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.demo.jianjunhuang.mvptools.adapter.CommonAdapter;
@@ -14,8 +13,8 @@ import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.jianjunhuang.bluemountain.R;
 import com.jianjunhuang.bluemountain.model.bean.CoffeUserBean;
 import com.jianjunhuang.bluemountain.utils.WaveHelper;
-import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
-import com.jianjunhuang.bluemountain.view.activity.LoginActivity;
+import com.jianjunhuang.bluemountain.view.activity.SmartConfigActivity;
+import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
 import com.jianjunhuang.lib.waveview.Wave;
 import com.jianjunhuang.lib.waveview.WaveView;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
@@ -100,7 +99,7 @@ public class CoffeeFragment extends BaseFragment {
                 //jude if connected
                 //no -> jump to connect activity
 
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), SignInUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +118,7 @@ public class CoffeeFragment extends BaseFragment {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
                     ToastUtils.show(result);
                     //TODO check the result is the machineId
-                    Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                    Intent intent = new Intent(getActivity(), SmartConfigActivity.class);
                     startActivity(intent);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     ToastUtils.show("解析失败");

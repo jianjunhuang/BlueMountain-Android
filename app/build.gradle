@@ -33,4 +33,5 @@ dependencies {
     implementation project(':esptouch')
     implementation project(':waveview')
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.library.jianjunhuang.okhttputils:okhttputils:0.1.1'
 }

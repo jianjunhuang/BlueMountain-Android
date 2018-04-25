@@ -24,19 +24,27 @@ public class UserInfo {
     public static synchronized Machine getMachine() {
         if (machine == null) {
             String machineJson = SPUtils.instance(Config.SP_MACHINE_INFO_FILE).getInfo(Config.SP_MACHINE_INFO_KEY, "");
-            if(machineJson.equals("")){
+            if (machineJson.equals("")) {
                 return null;
             }
-            machine = new Gson().fromJson(machineJson,Machine.class);
+            machine = new Gson().fromJson(machineJson, Machine.class);
         }
         return machine;
     }
 
     public static void setUser(User user) {
         UserInfo.user = user;
+        if (null != user) {
+            SPUtils.instance(Config.SP_USER_INFO_FILE)
+                    .store(Config.SP_USER_INFO_KEY, new Gson().toJson(user));
+        }
     }
 
     public static void setMachine(Machine machine) {
         UserInfo.machine = machine;
+        if (null != machine) {
+            SPUtils.instance(Config.SP_MACHINE_INFO_FILE)
+                    .store(Config.SP_MACHINE_INFO_KEY, new Gson().toJson(machine));
+        }
     }
 }
