@@ -162,6 +162,7 @@ public class ConnectActivity extends BaseActivity
     @Override
     public void onConnectedSuccess() {
         ToastUtils.show("connected success!");
+        finish();
     }
 
     @Override
