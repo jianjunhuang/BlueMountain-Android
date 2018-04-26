@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.demo.jianjunhuang.mvptools.utils.EncryptionUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jianjunhuang.bluemountain.application.UrlValue;
 import com.jianjunhuang.bluemountain.application.UserInfo;
 import com.jianjunhuang.bluemountain.contact.SignInUpContact;
@@ -55,12 +56,15 @@ public class SignInUpModel implements SignInUpContact.Model {
 
                     @Override
                     public void onResponse(String response, int code) throws IOException, JSONException {
-                        Result<User> result = gson.fromJson(response, Result.class);
+                        Result<User> result = gson.fromJson(response,
+                                new TypeToken<Result<User>>() {
+                                }.getType());
                         Log.i(TAG, "onResponse: response = " + response);
                         Log.i(TAG, "onResponse: result = " + result);
+                        Log.i(TAG, "onResponse: " + result.getData());
                         if (result.getStatus() == Result.SUCCESS) {
-                            mCallback.onSignInSuccess();
                             UserInfo.setUser(result.getData());
+                            mCallback.onSignInSuccess();
                         } else {
                             mCallback.onSignInFailed(result.getReason());
                         }
