@@ -11,8 +11,10 @@ import com.demo.jianjunhuang.mvptools.adapter.CommonViewHolder;
 import com.demo.jianjunhuang.mvptools.integration.BaseFragment;
 import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.jianjunhuang.bluemountain.R;
+import com.jianjunhuang.bluemountain.application.UserInfo;
 import com.jianjunhuang.bluemountain.model.bean.CoffeUserBean;
 import com.jianjunhuang.bluemountain.utils.WaveHelper;
+import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
 import com.jianjunhuang.bluemountain.view.activity.SmartConfigActivity;
 import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
 import com.jianjunhuang.lib.waveview.Wave;
@@ -91,9 +93,17 @@ public class CoffeeFragment extends BaseFragment {
                 //no -> jump to login activity
                 //jude if connected
                 //no -> jump to connect activity
-
-                Intent intent = new Intent(getActivity(), SignInUpActivity.class);
-                startActivity(intent);
+                if (null == UserInfo.getUser()) {
+                    Intent intent = new Intent(getActivity(), SignInUpActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                if (null == UserInfo.getUser().getMachineId()) {
+                    Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                ToastUtils.show("click");
             }
         });
     }
