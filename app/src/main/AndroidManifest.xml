@@ -37,6 +37,7 @@
         <activity android:name=".view.activity.CommunityAddActivity" />
         <activity android:name=".view.activity.SmartConfigActivity" />
         <activity android:name=".view.activity.SignInUpActivity" />
+        <activity android:name=".view.activity.ConnectActivity" />
     </application>
 
 </manifest>

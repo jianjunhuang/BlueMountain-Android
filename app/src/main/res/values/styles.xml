@@ -11,4 +11,9 @@
         <item name="android:windowBackground">@color/colorPrimaryLight</item>
     </style>
 
+    <style name="TipsDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/colorBlue</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
 </resources>

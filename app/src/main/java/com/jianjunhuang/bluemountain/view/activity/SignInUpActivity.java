@@ -1,5 +1,6 @@
 package com.jianjunhuang.bluemountain.view.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
@@ -138,8 +139,10 @@ public class SignInUpActivity extends BaseActivity
         loginBtn.setStatus(LoadingCircleBtn.STATUS_LOAD_SUCCESS);
         setEdtEnable(true);
         if (null == UserInfo.getUser().getMachineId()) {
-
+            Intent intent = new Intent(SignInUpActivity.this, ConnectActivity.class);
+            startActivity(intent);
         }
+//        finish();
     }
 
     @Override
