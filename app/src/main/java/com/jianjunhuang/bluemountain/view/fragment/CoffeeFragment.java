@@ -86,13 +86,6 @@ public class CoffeeFragment extends BaseFragment {
         coffeeInfoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String[] permissions = CheckPermissionUtils.checkPermission(getContext());
-//                if (permissions.length == 0) {
-//                    Intent intent = new Intent(getActivity(), CaptureActivity.class);
-//                    startActivityForResult(intent, 200);
-//                } else {
-//                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
-//                }
 
                 //jude if login
                 //no -> jump to login activity
@@ -104,29 +97,6 @@ public class CoffeeFragment extends BaseFragment {
             }
         });
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 200) {
-            if (null != data) {
-                Bundle bundle = data.getExtras();
-                if (null == bundle) {
-                    return;
-                }
-                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                    String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    ToastUtils.show(result);
-                    //TODO check the result is the machineId
-                    Intent intent = new Intent(getActivity(), SmartConfigActivity.class);
-                    startActivity(intent);
-                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    ToastUtils.show("解析失败");
-                }
-            }
-        }
-    }
-
 
     private static final String TAG = "CoffeeFragment";
 
