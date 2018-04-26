@@ -8,4 +8,8 @@ public class UrlValue {
     public static final String CHECK_USERNAME = BASE_URL + "user/checkUserName";
     public static final String USER_UPDATE = BASE_URL + "user/update";
     public static final String CONNECT = BASE_URL + "user/connect";
+
+    public static final String GET_COMMUNITY = BASE_URL + "community/get";
+    public static final String ADD_COMMUNITY = BASE_URL + "community/addAVote";
+    public static final String VOTE_COMMUNITY = BASE_URL + "community/vote";
 }
