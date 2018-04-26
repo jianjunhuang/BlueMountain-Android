@@ -45,6 +45,8 @@ public class ConnectModel implements ConnectContact.Model {
                         }.getType());
                         if (result.getStatus() == Result.SUCCESS) {
                             UserInfo.setMachine(result.getData());
+                            UserInfo.getUser().setMachineId(result.getData().getMachineId());
+                            UserInfo.setUser(UserInfo.getUser());
                             mCallback.onConnectedSuccess();
                         } else {
                             mCallback.onConnectedFailed(result.getReason());
