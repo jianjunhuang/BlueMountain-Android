@@ -30,18 +30,7 @@ public class SignInUpModel implements SignInUpContact.Model {
         if (mCallback == null) {
             return;
         }
-        if (null == userName || "".equals(userName)) {
-            mCallback.onSignInFailed("请输入用户名");
-            return;
-        }
-        if (null == pwd || "".equals(pwd)) {
-            mCallback.onSignInFailed("请输入密码");
-            return;
-        }
-        if (pwd.length() != 8) {
-            mCallback.onSignInFailed("请输入 8位 的正确密码");
-            return;
-        }
+
         OkHttpUtils.getInstance()
                 .postJsonAsy()
                 .baseURL(UrlValue.LOGIN)
@@ -77,22 +66,7 @@ public class SignInUpModel implements SignInUpContact.Model {
         if (mCallback == null) {
             return;
         }
-        if (null == userName || "".equals(userName)) {
-            mCallback.onSignUpFailed("请输入用户名");
-            return;
-        }
-        if (null == pwd || "".equals(pwd) || pwd.length() != 8) {
-            mCallback.onSignUpFailed("请输入 8位 密码");
-            return;
-        }
-        if (null == surePwd || "".equals(surePwd) || surePwd.length() != 8) {
-            mCallback.onSignUpFailed("请再次输入 8位 密码");
-            return;
-        }
-        if (!pwd.equals(surePwd)) {
-            mCallback.onSignUpFailed("两次输入的密码不一致，请重新输入");
-            return;
-        }
+
         OkHttpUtils.getInstance()
                 .postJsonAsy()
                 .baseURL(UrlValue.REGISTER)
@@ -125,10 +99,7 @@ public class SignInUpModel implements SignInUpContact.Model {
         if (mCallback == null) {
             return;
         }
-        if (null == userName || "".equals(userName)) {
-            mCallback.onUserNameStatus(false);
-            return;
-        }
+
         OkHttpUtils.getInstance()
                 .postJsonAsy()
                 .baseURL(UrlValue.CHECK_USERNAME)
