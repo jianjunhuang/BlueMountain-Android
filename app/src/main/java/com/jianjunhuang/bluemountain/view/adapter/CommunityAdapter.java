@@ -47,7 +47,6 @@ public class CommunityAdapter extends RecyclerAdapter<Community> {
             positiveDrawable = ContextCompat.getDrawable(context, R.drawable.up);
             negativeDrawable = ContextCompat.getDrawable(context, R.drawable.down);
         }
-        Log.i(TAG, "convert: " + positiveDrawable + " " + negativeDrawable);
         positiveDrawable.setBounds(0, 0, positiveDrawable.getIntrinsicWidth(), positiveDrawable.getIntrinsicHeight());
         negativeDrawable.setBounds(0, 0, negativeDrawable.getIntrinsicWidth(), negativeDrawable.getIntrinsicHeight());
         positiveBtn.setCompoundDrawables(positiveDrawable, null, null, null);
