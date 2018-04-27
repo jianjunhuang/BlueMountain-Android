@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -44,6 +44,7 @@
         android:textSize="15sp" />
 
     <LinearLayout
+        android:id="@+id/community_item_position_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/community_item_content_tv"
@@ -62,6 +63,7 @@
             android:drawableLeft="@drawable/up_selected"
             android:padding="8dp"
             android:text="赞同 99"
+            android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
 
@@ -73,7 +75,16 @@
             android:drawableLeft="@drawable/down"
             android:padding="8dp"
             android:text="不赞同 100"
+            android:textAllCaps="false"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/community_item_position_layout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary" />
 </RelativeLayout>

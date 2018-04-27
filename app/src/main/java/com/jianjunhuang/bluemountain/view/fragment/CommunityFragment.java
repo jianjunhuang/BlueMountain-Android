@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.demo.jianjunhuang.mvptools.adapter.RecyclerAdapter;
 import com.demo.jianjunhuang.mvptools.adapter.RecyclerViewHolder;
 import com.demo.jianjunhuang.mvptools.integration.BaseFragment;
+import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.jianjunhuang.bluemountain.R;
 import com.jianjunhuang.bluemountain.application.UserInfo;
 import com.jianjunhuang.bluemountain.contact.CommunityContact;
@@ -27,7 +28,8 @@ import java.util.List;
  * Created by jianjunhuang on 18-3-24.
  */
 
-public class CommunityFragment extends BaseFragment implements CommunityContact.View<Community> {
+public class CommunityFragment extends BaseFragment implements CommunityContact.View<Community>,
+        CommunityAdapter.OnDisPositionChooseListener {
 
     private List<Community> list = new ArrayList<>();
     private RecyclerView communityRv;
@@ -59,6 +61,7 @@ public class CommunityFragment extends BaseFragment implements CommunityContact.
 
     @Override
     protected void initListener() {
+        mAdapter.setListener(this);
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,12 +91,13 @@ public class CommunityFragment extends BaseFragment implements CommunityContact.
 
     @Override
     public void onSendSuccess() {
-
+        mPresenter.getCommunity(UserInfo.getUser().getUserId(),
+                UserInfo.getMachine().getMachineId());
     }
 
     @Override
     public void onSendFailed(String reason) {
-
+        ToastUtils.show(reason);
     }
 
     @Override
@@ -108,5 +112,16 @@ public class CommunityFragment extends BaseFragment implements CommunityContact.
             emptyView.hide();
         }
 
+    }
+
+    @Override
+    public void onChoose(String communityId, int isAgree, boolean choose) {
+        if (choose) {
+            ToastUtils.show("你已经表过态了！不能再表态了！");
+            return;
+        }
+        mPresenter.sendPosition(UserInfo.getUser().getUserId(),
+                communityId,
+                isAgree);
     }
 }

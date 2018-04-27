@@ -52,11 +52,15 @@ public class CommunityPresenter implements CommunityContact.Presenter {
     @Override
     public void sendPosition(String userId, String communityId, int isAgree) {
         if (null == userId || "".equals(userId)) {
-            mView.onGetFailed("userId is null or equals ''");
+            mView.onSendFailed("userId is null or equals ''");
             return;
         }
         if (null == communityId || "".equals(communityId)) {
-            mView.onGetFailed("communityId is null or equals ''");
+            mView.onSendFailed("communityId is null or equals ''");
+            return;
+        }
+        if(isAgree == 0){
+            mView.onSendFailed("please make a choice");
             return;
         }
         mModel.sendPosition(userId, communityId, isAgree);
