@@ -9,4 +9,5 @@
     <color name="colorRed">#f44336</color>
     <color name="colorGreen">#86cb96</color>
     <color name="colorBlue">#58abe3</color>
+    <color name="colorCardView">#8C6E63</color>
 </resources>

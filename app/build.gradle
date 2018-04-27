@@ -34,4 +34,5 @@ dependencies {
     implementation project(':waveview')
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.library.jianjunhuang.okhttputils:okhttputils:0.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
 }
