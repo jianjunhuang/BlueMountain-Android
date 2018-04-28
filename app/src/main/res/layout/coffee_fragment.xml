@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#795548"
     android:orientation="vertical">
 
-    <com.jianjunhuang.lib.waveview.WaveView
-        android:id="@+id/coffee_info_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:src="@drawable/icon" />
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/app_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:fitsSystemWindows="false">-->
 
-    <ListView
-        android:id="@+id/coffee_info_lv"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <!--<android.support.design.widget.CollapsingToolbarLayout-->
+    <!--android:id="@+id/collapsing_toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+    <!--app:contentScrim="@color/colorPrimaryLight"-->
+    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+    <!--app:title="@string/app_name">-->
 
-</LinearLayout>
+    <!--<com.jianjunhuang.lib.waveview.WaveView-->
+    <!--android:id="@+id/coffee_info_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/coffee_info_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <include
+        layout="@layout/reserve_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/coffee_info_rv"
+        app:layout_anchorGravity="bottom|right"
+        app:layout_behavior="com.jianjunhuang.bluemountain.view.widget.ScrollAwareFABBehavior" />
+
+
+</android.support.design.widget.CoordinatorLayout>
