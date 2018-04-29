@@ -54,8 +54,8 @@ public class HomepageActivity extends BaseActivity {
         tabLayout.getTabAt(0).setText("coffee");
         tabLayout.getTabAt(1).setIcon(R.drawable.community_selected);
         tabLayout.getTabAt(1).setText("community");
-        tabLayout.getTabAt(2).setIcon(R.drawable.mine_selected);
-        tabLayout.getTabAt(2).setText("mine");
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_settings_white_24dp);
+        tabLayout.getTabAt(2).setText("setting");
         initInfoView();
     }
 
