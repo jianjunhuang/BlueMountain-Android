@@ -6,7 +6,7 @@ import com.demo.jianjunhuang.mvptools.mvp.IView;
 
 import java.util.List;
 
-public class CommunityContact {
+public interface CommunityContact {
 
     public interface View<T> extends IView {
         void onGetSuccess(List<T> list);

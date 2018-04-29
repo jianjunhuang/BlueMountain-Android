@@ -4,7 +4,7 @@ import com.demo.jianjunhuang.mvptools.mvp.IModel;
 import com.demo.jianjunhuang.mvptools.mvp.IPresenter;
 import com.demo.jianjunhuang.mvptools.mvp.IView;
 
-public class ConnectContact {
+public interface ConnectContact {
     public interface View extends IView {
         void onConnectedSuccess();
 
