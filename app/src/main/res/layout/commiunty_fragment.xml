@@ -21,6 +21,6 @@
         app:fabSize="normal"
         app:layout_anchor="@id/community_rv"
         app:layout_anchorGravity="bottom|right"
-        app:layout_behavior="com.jianjunhuang.bluemountain.view.widget.ScrollAwareFABBehavior" />
+        app:layout_behavior="com.jianjunhuang.bluemountain.view.widget.ScrollAwareBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,10 +1,8 @@
 package com.jianjunhuang.bluemountain.view.widget;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -13,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
-public class ScrollAwareFABBehavior extends CoordinatorLayout.Behavior {
+public class ScrollAwareBehavior extends CoordinatorLayout.Behavior {
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
     private boolean mIsAnimatingOut = false;
 
-    public ScrollAwareFABBehavior(Context context, AttributeSet attrs) {
+    public ScrollAwareBehavior(Context context, AttributeSet attrs) {
         super();
     }
 
@@ -45,38 +43,39 @@ public class ScrollAwareFABBehavior extends CoordinatorLayout.Behavior {
 
     // Same animation that FloatingActionButton.Behavior uses to hide the FAB when the AppBarLayout exits
     private void animateOut(final View button) {
-        if (Build.VERSION.SDK_INT >= 14) {
-            ViewCompat.animate(button).translationY(button.getHeight()
-                    + getMarginBottom(button)).setInterpolator(INTERPOLATOR).withLayer()
-                    .setListener(new ViewPropertyAnimatorListener() {
-                        public void onAnimationStart(View view) {
-                            ScrollAwareFABBehavior.this.mIsAnimatingOut = true;
-                        }
-
-                        public void onAnimationCancel(View view) {
-                            ScrollAwareFABBehavior.this.mIsAnimatingOut = false;
-                        }
-
-                        public void onAnimationEnd(View view) {
-                            ScrollAwareFABBehavior.this.mIsAnimatingOut = false;
-                            view.setVisibility(View.INVISIBLE);
-                        }
-                    }).start();
-        } else {
-
+        if (null != onScrollListener) {
+            onScrollListener.onOut(button);
         }
+        ViewCompat.animate(button).translationY(button.getHeight()
+                + getMarginBottom(button)).setInterpolator(INTERPOLATOR).withLayer()
+                .setListener(new ViewPropertyAnimatorListener() {
+                    public void onAnimationStart(View view) {
+                        ScrollAwareBehavior.this.mIsAnimatingOut = true;
+                    }
+
+                    public void onAnimationCancel(View view) {
+                        ScrollAwareBehavior.this.mIsAnimatingOut = false;
+                    }
+
+                    public void onAnimationEnd(View view) {
+                        ScrollAwareBehavior.this.mIsAnimatingOut = false;
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                }).start();
+
+
     }
 
     // Same animation that FloatingActionButton.Behavior uses to show the FAB when the AppBarLayout enters
     private void animateIn(View button) {
-        button.setVisibility(View.VISIBLE);
-        if (Build.VERSION.SDK_INT >= 14) {
-            ViewCompat.animate(button).translationY(0)
-                    .setInterpolator(INTERPOLATOR).withLayer().setListener(null)
-                    .start();
-        } else {
-
+        if (null != onScrollListener) {
+            onScrollListener.onIn(button);
         }
+        button.setVisibility(View.VISIBLE);
+        ViewCompat.animate(button).translationY(0)
+                .setInterpolator(INTERPOLATOR).withLayer().setListener(null)
+                .start();
+
     }
 
     private int getMarginBottom(View v) {
@@ -86,5 +85,17 @@ public class ScrollAwareFABBehavior extends CoordinatorLayout.Behavior {
             marginBottom = ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin;
         }
         return marginBottom;
+    }
+
+    private OnScrollListener onScrollListener;
+
+    public void setOnScrollListener(OnScrollListener onScrollListener) {
+        this.onScrollListener = onScrollListener;
+    }
+
+    public interface OnScrollListener {
+        void onIn(View view);
+
+        void onOut(View view);
     }
 }

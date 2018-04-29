@@ -1,30 +1,22 @@
 package com.jianjunhuang.bluemountain.view.fragment;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.demo.jianjunhuang.mvptools.adapter.CommonAdapter;
-import com.demo.jianjunhuang.mvptools.adapter.CommonViewHolder;
-import com.demo.jianjunhuang.mvptools.adapter.RecyclerAdapter;
-import com.demo.jianjunhuang.mvptools.adapter.RecyclerViewHolder;
 import com.demo.jianjunhuang.mvptools.integration.BaseFragment;
-import com.demo.jianjunhuang.mvptools.utils.ToastUtils;
 import com.jianjunhuang.bluemountain.R;
-import com.jianjunhuang.bluemountain.application.UserInfo;
-import com.jianjunhuang.bluemountain.model.bean.CoffeUserBean;
 import com.jianjunhuang.bluemountain.model.bean.User;
-import com.jianjunhuang.bluemountain.utils.WaveHelper;
-import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
-import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
 import com.jianjunhuang.bluemountain.view.adapter.CoffeeAdapter;
-import com.jianjunhuang.lib.waveview.Wave;
-import com.jianjunhuang.lib.waveview.WaveView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +29,11 @@ public class CoffeeFragment extends BaseFragment {
 
     private RecyclerView userRv;
     private List<User> mList = new ArrayList<>();
-
+    private RelativeLayout reserveRl;
+    private LinearLayout reserveInfoLl;
+    private FloatingActionButton reserveFab;
+    private TextView temperatureTv;
+    private TextView statusTv;
 
     @Override
     protected int getLayoutId() {
@@ -47,6 +43,12 @@ public class CoffeeFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         userRv = findView(R.id.coffee_info_rv);
+        reserveRl = findView(R.id.coffee_reserve_rl);
+        reserveInfoLl = findView(R.id.coffee_reserve_info_ll);
+        reserveFab = findView(R.id.coffee_reserve_fab);
+        temperatureTv = findView(R.id.coffee_reserve_temperature_tv);
+        statusTv = findView(R.id.coffee_reserve_status_tv);
+
         LinearLayoutManager mManager = new LinearLayoutManager(getContext());
         mManager.setOrientation(LinearLayoutManager.VERTICAL);
         userRv.setLayoutManager(mManager);
@@ -57,10 +59,9 @@ public class CoffeeFragment extends BaseFragment {
         }
         userRv.setAdapter(new CoffeeAdapter(getContext(), mList, R.layout.coffee_item_layout));
 
-//        initInfoView(view);
-
     }
 
+    private static final String TAG = "CoffeeFragment";
 
 
     @Override
@@ -86,9 +87,17 @@ public class CoffeeFragment extends BaseFragment {
 //                ToastUtils.show("click");
 //            }
 //        });
+
+        reserveFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reserveInfoLl.setBackgroundResource(R.drawable.reserve_making_background);
+                temperatureTv.setTextColor(Color.WHITE);
+                statusTv.setTextColor(Color.WHITE);
+            }
+        });
     }
 
-    private static final String TAG = "CoffeeFragment";
 
     @Override
     protected void onLazyLoad() {
