@@ -12,4 +12,8 @@ public class UrlValue {
     public static final String GET_COMMUNITY = BASE_URL + "community/get";
     public static final String ADD_COMMUNITY = BASE_URL + "community/addAVote";
     public static final String VOTE_COMMUNITY = BASE_URL + "community/vote";
+
+    public static final String GET_ALL_USERS = BASE_URL + "user/getAllUsers";
+
+    public static final String GET_MACHINE = BASE_URL + "machine/getMachine";
 }

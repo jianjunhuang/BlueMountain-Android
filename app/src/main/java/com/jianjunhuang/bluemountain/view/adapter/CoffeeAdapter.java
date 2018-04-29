@@ -19,10 +19,23 @@ public class CoffeeAdapter extends RecyclerAdapter<User> {
 
     @Override
     public void convert(RecyclerViewHolder viewHolder, User user) {
-        AvatarView avatarView = viewHolder.getView(R.id.coffee_item_avatar);
-        avatarView.setColor(ContextCompat.getColor(context, R.color.colorBlue));
 
         viewHolder.setText(R.id.coffee_item_name_tv, user.getName());
+
+        AvatarView avatarView = viewHolder.getView(R.id.coffee_item_avatar);
+        if (user.getStatus() == User.WAITING) {
+            avatarView.setColor(ContextCompat.getColor(context, R.color.colorOrange));
+            viewHolder.setText(R.id.coffee_item_status_tv, "正在等待咖啡");
+        } else if (user.getStatus() == User.OUTLINE) {
+            avatarView.setColor(ContextCompat.getColor(context, R.color.colorHint));
+            viewHolder.setText(R.id.coffee_item_status_tv, "离线中");
+        } else if (user.getStatus() == User.GETINT) {
+            avatarView.setColor(ContextCompat.getColor(context, R.color.colorGreen));
+            viewHolder.setText(R.id.coffee_item_status_tv, "倒咖啡中");
+        } else if (user.getStatus() == User.ONLINE) {
+            avatarView.setColor(ContextCompat.getColor(context, R.color.colorBlue));
+            viewHolder.setText(R.id.coffee_item_status_tv, "在线上");
+        }
 
     }
 }

@@ -7,30 +7,7 @@
     android:background="#795548"
     android:orientation="vertical">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-    <!--android:id="@+id/app_bar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:fitsSystemWindows="false">-->
-
-    <!--<android.support.design.widget.CollapsingToolbarLayout-->
-    <!--android:id="@+id/collapsing_toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-    <!--app:contentScrim="@color/colorPrimaryLight"-->
-    <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
-    <!--app:title="@string/app_name">-->
-
-    <!--<com.jianjunhuang.lib.waveview.WaveView-->
-    <!--android:id="@+id/coffee_info_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
-    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
-
+    <include layout="@layout/empty_layout" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/coffee_info_rv"
@@ -65,7 +42,7 @@
                 android:drawableLeft="@drawable/ic_whatshot_black_24dp"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="加热: 90" />
+                android:text="加热: " />
 
             <TextView
                 android:id="@+id/coffee_reserve_status_tv"
@@ -75,7 +52,7 @@
                 android:drawableLeft="@drawable/ic_info_outline_black_24dp"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="正在煮咖啡" />
+                android:text="" />
 
         </LinearLayout>
 
