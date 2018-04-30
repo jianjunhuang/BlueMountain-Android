@@ -8,15 +8,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 
 import com.demo.jianjunhuang.mvptools.integration.BaseActivity;
 import com.jianjunhuang.bluemountain.R;
 import com.jianjunhuang.bluemountain.utils.WaveHelper;
 import com.jianjunhuang.bluemountain.view.fragment.CoffeeFragment;
 import com.jianjunhuang.bluemountain.view.fragment.CommunityFragment;
-import com.jianjunhuang.bluemountain.view.fragment.MineFragment;
+import com.jianjunhuang.bluemountain.view.fragment.SettingFragment;
 import com.jianjunhuang.lib.waveview.Wave;
 import com.jianjunhuang.lib.waveview.WaveView;
 
@@ -46,7 +44,7 @@ public class HomepageActivity extends BaseActivity {
         List<Fragment> list = new ArrayList<>();
         list.add(new CoffeeFragment());
         list.add(new CommunityFragment());
-        list.add(new MineFragment());
+        list.add(new SettingFragment());
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), list));
         viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);

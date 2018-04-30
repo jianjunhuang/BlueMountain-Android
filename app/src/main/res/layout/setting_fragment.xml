@@ -17,38 +17,49 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="Name"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/setting_name_edt"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:editable="false"
+                android:layout_weight="5"
+                android:focusable="false"
                 android:gravity="right"
                 android:text="Name"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
+
+            <ImageButton
+                android:id="@+id/setting_name_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorBlue"
+                android:src="@drawable/ic_send_white_24dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cup Size"
+                android:text="Cup Capacity"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/mine_cup_size_tv"
+                android:id="@+id/setting_cup_capacity_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -59,27 +70,28 @@
         </LinearLayout>
 
         <SeekBar
-            android:id="@+id/mine_cup_size_seek"
+            android:id="@+id/setting_cup_capacity_seek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:max="550"
             android:paddingBottom="8dp"
             android:paddingTop="8dp" />
 
         <LinearLayout
-            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature"
+                android:text="Holding Temperature"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/mine_temperature_tv"
+                android:id="@+id/setting_temperature_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -90,14 +102,14 @@
         </LinearLayout>
 
         <SeekBar
-            android:id="@+id/mine_temperature_seek"
+            android:id="@+id/setting_temperature_seek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp" />
 
         <Button
-            android:id="@+id/mine_invite_btn"
+            android:id="@+id/setting_invite_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -108,7 +120,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/mine_disconnect_btn"
+            android:id="@+id/setting_disconnect_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"

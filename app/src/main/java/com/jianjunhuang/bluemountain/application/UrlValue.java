@@ -8,6 +8,9 @@ public class UrlValue {
     public static final String CHECK_USERNAME = BASE_URL + "user/checkUserName";
     public static final String USER_UPDATE = BASE_URL + "user/update";
     public static final String CONNECT = BASE_URL + "user/connect";
+    public static final String DISCONNECT = BASE_URL + "user/disconnected";
+    public static final String UPDATE_USER_NAME = BASE_URL + "user/updateUserName";
+    public static final String UPDATE_USER_CUP_SIZE = BASE_URL + "user/updateUserCupSize";
 
     public static final String GET_COMMUNITY = BASE_URL + "community/get";
     public static final String ADD_COMMUNITY = BASE_URL + "community/addAVote";
@@ -16,4 +19,6 @@ public class UrlValue {
     public static final String GET_ALL_USERS = BASE_URL + "user/getAllUsers";
 
     public static final String GET_MACHINE = BASE_URL + "machine/getMachine";
+    public static final String UPDATE_MACHINE_INSULATION = BASE_URL + "machine/setInsulationTemperature";
+
 }
