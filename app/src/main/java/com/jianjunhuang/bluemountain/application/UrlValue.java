@@ -21,4 +21,5 @@ public class UrlValue {
     public static final String GET_MACHINE = BASE_URL + "machine/getMachine";
     public static final String UPDATE_MACHINE_INSULATION = BASE_URL + "machine/setInsulationTemperature";
 
+    public static final String ORDER_COFFEE = BASE_URL + "machine/orderCoffee";
 }

@@ -35,6 +35,21 @@ public class CoffeePresenter implements CoffeeContact.Presenter {
             public void onGetMachineFailed(String reason) {
                 mView.onGetMachineFailed(reason);
             }
+
+            @Override
+            public void onOrderCoffeeSuccess() {
+                mView.onOrderCoffeeSuccess();
+            }
+
+            @Override
+            public void onOrderCoffeeFailed(String reason) {
+                mView.onOrderCoffeeFailed(reason);
+            }
+
+            @Override
+            public void onCoffeeFinish() {
+                mView.onCoffeeFinish();
+            }
         });
     }
 
@@ -71,6 +86,19 @@ public class CoffeePresenter implements CoffeeContact.Presenter {
             return;
         }
         mModel.connectByWebSocket(userId, machineId);
+    }
+
+    @Override
+    public void orderCoffee(String machineId, String userId) {
+        if (null == userId || "".equals(userId)) {
+            mView.onOrderCoffeeFailed("userId is null or equals ''");
+            return;
+        }
+        if (null == machineId || "".equals(machineId)) {
+            mView.onOrderCoffeeFailed("machineId is null or equals ''");
+            return;
+        }
+        mModel.orderCoffee(machineId, userId);
     }
 
     @Override

@@ -99,9 +99,10 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         reserveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reserveInfoLl.setBackgroundResource(R.drawable.reserve_making_background);
-                temperatureTv.setTextColor(Color.WHITE);
-                statusTv.setTextColor(Color.WHITE);
+                mPresenter.orderCoffee(UserInfo.getMachine().getMachineId(),
+                        UserInfo.getUser().getUserId());
+
+
             }
         });
     }
@@ -110,6 +111,8 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
+        mPresenter.connectByWebSocket(UserInfo.getUser().getUserId(),
+                UserInfo.getMachine().getMachineId());
         mPresenter.getUsers(UserInfo.getUser().getUserId(),
                 UserInfo.getMachine().getMachineId());
         mPresenter.getMachine(UserInfo.getMachine().getMachineId());
@@ -139,7 +142,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
 
     @Override
     public void onGetMachineSuccess(Machine machine) {
-        temperatureTv.setText("保温：" + machine.getInsulation());
+        temperatureTv.setText("加热：" + machine.getTemperature());
         switch (machine.getStatus()) {
             case Machine.STATUS_DISCONNECTED: {
                 statusTv.setText("断开连接");
@@ -147,10 +150,12 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
             }
             case Machine.STATUS_KEEP_WARMING: {
                 statusTv.setText("正在保温");
+                temperatureTv.setText("保温：" + machine.getInsulation());
                 break;
             }
             case Machine.STATUS_MAKING_COFFEE: {
                 statusTv.setText("正在煮咖啡");
+                temperatureTv.setText("加热：" + machine.getTemperature());
                 break;
             }
             case Machine.STATUS_NO_WATER: {
@@ -167,5 +172,24 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     @Override
     public void onGetMachineFailed(String reason) {
         ToastUtils.show(reason);
+    }
+
+    @Override
+    public void onOrderCoffeeSuccess() {
+        reserveInfoLl.setBackgroundResource(R.drawable.reserve_making_background);
+        temperatureTv.setTextColor(Color.WHITE);
+        statusTv.setTextColor(Color.WHITE);
+    }
+
+    @Override
+    public void onOrderCoffeeFailed(String reason) {
+        ToastUtils.show(reason);
+    }
+
+    @Override
+    public void onCoffeeFinish() {
+        reserveInfoLl.setBackgroundResource(R.drawable.reserve_ordered_background);
+        temperatureTv.setTextColor(Color.WHITE);
+        statusTv.setTextColor(Color.WHITE);
     }
 }

@@ -1,5 +1,6 @@
 package com.jianjunhuang.bluemountain.model;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,6 +12,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.jianjunhuang.bluemountain.application.UrlValue;
 import com.jianjunhuang.bluemountain.contact.CoffeeContact;
+import com.jianjunhuang.bluemountain.model.bean.Action;
 import com.jianjunhuang.bluemountain.model.bean.Machine;
 import com.jianjunhuang.bluemountain.model.bean.Result;
 import com.jianjunhuang.bluemountain.model.bean.User;
@@ -26,6 +28,12 @@ import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
 
 public class CoffeeModel implements CoffeeContact.Model {
 
@@ -108,8 +116,103 @@ public class CoffeeModel implements CoffeeContact.Model {
     }
 
     @Override
-    public void connectByWebSocket(String userId, String machineId) {
+    public void connectByWebSocket(final String userId, final String machineId) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("ws://10.11.3.213:8080/websocket/socketServer")
+                .header("machineId", machineId)
+                .header("type", "phone")
+                .header("userId", userId)
+                .build();
+        WebSocket webSocket = client
+                .newWebSocket(request, new WebSocketListener() {
+                    @Override
+                    public void onOpen(WebSocket webSocket, Response response) {
+                        super.onOpen(webSocket, response);
+                        webSocket.send("open");
+                        Log.i(TAG, "onOpen: ");
+                    }
 
+                    @Override
+                    public void onMessage(WebSocket webSocket, String text) {
+                        super.onMessage(webSocket, text);
+                        Log.i(TAG, "onMessage: " + text);
+                        Action action = gson.fromJson(text, Action.class);
+                        switch (action.getAction()) {
+                            case Action.GET_COFFEE: {
+                                Log.i(TAG, "onMessage: get coffee");
+                                mCallback.onCoffeeFinish();
+                                break;
+                            }
+                            case Action.UPDATE_MACHINE: {
+                                Log.i(TAG, "onMessage: update machine");
+                                getMachine(machineId);
+                                break;
+                            }
+                            case Action.UPDATE_USERS: {
+                                Log.i(TAG, "onMessage: update users");
+                                getUsers(userId, machineId);
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onMessage(WebSocket webSocket, ByteString bytes) {
+                        super.onMessage(webSocket, bytes);
+                        Log.i(TAG, "onMessage: ");
+                    }
+
+                    @Override
+                    public void onClosing(WebSocket webSocket, int code, String reason) {
+                        super.onClosing(webSocket, code, reason);
+                        Log.i(TAG, "onClosing: ");
+                    }
+
+                    @Override
+                    public void onClosed(WebSocket webSocket, int code, String reason) {
+                        super.onClosed(webSocket, code, reason);
+                        Log.i(TAG, "onClosed: ");
+                    }
+
+                    @Override
+                    public void onFailure(WebSocket webSocket, Throwable t, @Nullable Response response) {
+                        super.onFailure(webSocket, t, response);
+                        Log.i(TAG, "onFailure: ");
+                    }
+                });
+        client.dispatcher()
+                .executorService()
+                .shutdown();
+    }
+
+    @Override
+    public void orderCoffee(String machineId, String userId) {
+        if (null == mCallback) {
+            return;
+        }
+        OkHttpUtils.getInstance()
+                .postJsonAsy()
+                .baseURL(UrlValue.ORDER_COFFEE)
+                .params("machineId", machineId)
+                .params("userId", userId)
+                .build()
+                .execute(new ResultCallback() {
+                    @Override
+                    public void onError(Call call, int code, Exception e) {
+                        mCallback.onOrderCoffeeFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int code) throws IOException, JSONException {
+                        Result result = gson.fromJson(response, Result.class);
+                        if (result.getStatus() == Result.SUCCESS) {
+                            mCallback.onOrderCoffeeSuccess();
+                        } else {
+                            mCallback.onOrderCoffeeFailed(result.getReason());
+                        }
+                    }
+                });
     }
 
     @Override
