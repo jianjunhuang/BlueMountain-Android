@@ -1,5 +1,7 @@
 package com.jianjunhuang.bluemountain.view.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -45,6 +47,8 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     private CoffeePresenter mPresenter;
     private CoffeeAdapter mAdapter;
 
+    private AlertDialog alertDialog;
+
     @Override
     protected int getLayoutId() {
         return R.layout.coffee_fragment;
@@ -66,11 +70,27 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         userRv.setLayoutManager(mManager);
         mAdapter = new CoffeeAdapter(getContext(), mList, R.layout.coffee_item_layout);
         userRv.setAdapter(mAdapter);
-
+        initAlertDialog();
     }
 
     private static final String TAG = "CoffeeFragment";
 
+    private void initAlertDialog() {
+        alertDialog = new AlertDialog.Builder(getContext(), R.style.TipsDialogTheme)
+                .setTitle("Tips")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        alertDialog.setMessage("快去倒咖啡啦！");
+    }
 
     @Override
     protected void initListener() {
@@ -191,5 +211,6 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         reserveInfoLl.setBackgroundResource(R.drawable.reserve_ordered_background);
         temperatureTv.setTextColor(Color.WHITE);
         statusTv.setTextColor(Color.WHITE);
+        alertDialog.show();
     }
 }
