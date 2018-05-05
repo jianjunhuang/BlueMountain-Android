@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -124,7 +126,7 @@ public class CoffeeModel implements CoffeeContact.Model {
                 .header("type", "phone")
                 .header("userId", userId)
                 .build();
-        WebSocket webSocket = client
+        final WebSocket webSocket = client
                 .newWebSocket(request, new WebSocketListener() {
                     @Override
                     public void onOpen(WebSocket webSocket, Response response) {
@@ -184,6 +186,15 @@ public class CoffeeModel implements CoffeeContact.Model {
         client.dispatcher()
                 .executorService()
                 .shutdown();
+        //heart beat
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                webSocket.send(userId);
+            }
+        };
+        timer.schedule(timerTask,0,30000);
     }
 
     @Override

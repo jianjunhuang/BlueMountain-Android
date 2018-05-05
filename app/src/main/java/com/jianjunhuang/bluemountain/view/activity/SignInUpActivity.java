@@ -142,7 +142,7 @@ public class SignInUpActivity extends BaseActivity
             Intent intent = new Intent(SignInUpActivity.this, ConnectActivity.class);
             startActivity(intent);
         }
-//        finish();
+        finish();
     }
 
     @Override

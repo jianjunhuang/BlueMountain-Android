@@ -2,6 +2,7 @@ package com.jianjunhuang.bluemountain.view.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -23,6 +24,8 @@ import com.jianjunhuang.bluemountain.contact.CoffeeContact;
 import com.jianjunhuang.bluemountain.model.bean.Machine;
 import com.jianjunhuang.bluemountain.model.bean.User;
 import com.jianjunhuang.bluemountain.presenter.CoffeePresenter;
+import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
+import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
 import com.jianjunhuang.bluemountain.view.adapter.CoffeeAdapter;
 import com.jianjunhuang.bluemountain.view.widget.EmptyView;
 
@@ -94,35 +97,23 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
 
     @Override
     protected void initListener() {
-//        coffeeInfoView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //jude if login
-//                //no -> jump to login activity
-//                //jude if connected
-//                //no -> jump to connect activity
-//                if (null == UserInfo.getUser()) {
-//                    Intent intent = new Intent(getActivity(), SignInUpActivity.class);
-//                    startActivity(intent);
-//                    return;
-//                }
-//                if (null == UserInfo.getUser().getMachineId()) {
-//                    Intent intent = new Intent(getActivity(), ConnectActivity.class);
-//                    startActivity(intent);
-//                    return;
-//                }
-//                ToastUtils.show("click");
-//            }
-//        });
-
         reserveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (null == UserInfo.getUser()) {
+                    Intent intent = new Intent(getActivity(), SignInUpActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                if (null == UserInfo.getUser().getMachineId()) {
+                    Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+
                 mPresenter.orderCoffee(UserInfo.getMachine().getMachineId(),
                         UserInfo.getUser().getUserId());
-
-
             }
         });
     }
