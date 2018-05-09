@@ -1,5 +1,6 @@
 package com.jianjunhuang.bluemountain.view.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.jianjunhuang.bluemountain.contact.SettingContact;
 import com.jianjunhuang.bluemountain.model.bean.Machine;
 import com.jianjunhuang.bluemountain.model.bean.User;
 import com.jianjunhuang.bluemountain.presenter.SettingPresenter;
+import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
+import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
 import com.jianjunhuang.bluemountain.view.widget.QRDialog;
 
 /**
@@ -57,6 +60,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         disconnectBtn = findView(R.id.setting_disconnect_btn);
         nameBtn = findView(R.id.setting_name_btn);
         qrDialog = new QRDialog(getContext());
+
     }
 
     @Override
@@ -74,27 +78,61 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         super.onLazyLoad();
         mPresenter.getMachineInfo();
         mPresenter.getUserInfo();
+        if (UserInfo.getUser() == null) {
+            disconnectBtn.setText("Sign In");
+        } else {
+            if (UserInfo.getMachine() == null) {
+                disconnectBtn.setText("Connect");
+            } else {
+                disconnectBtn.setText("Disconnect");
+            }
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setting_invite_btn: {
-                mPresenter.invite(
-                        UserInfo.getMachine().getMachineId(),
-                        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                if (UserInfo.getUser() != null) {
+                    if (UserInfo.getMachine() == null) {
+                        ToastUtils.show("please connect coffee machine first!");
+                        return;
+                    }
+                    mPresenter.invite(
+                            UserInfo.getMachine().getMachineId(),
+                            BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                } else {
+                    ToastUtils.show("please sign in first");
+                }
                 break;
             }
             case R.id.setting_disconnect_btn: {
-                mPresenter.disconnect(UserInfo.getUser().getUserId(),
-                        UserInfo.getMachine().getMachineId());
+                if (UserInfo.getUser() == null) {
+
+                    Intent intent = new Intent(getActivity(), SignInUpActivity.class);
+                    startActivity(intent);
+                } else {
+                    if (UserInfo.getMachine() == null) {
+
+                        Intent intent = new Intent(getActivity(), ConnectActivity.class);
+                        startActivity(intent);
+                    } else {
+                        mPresenter.disconnect(UserInfo.getUser().getUserId(),
+                                UserInfo.getMachine().getMachineId());
+                    }
+                }
                 break;
             }
             case R.id.setting_name_btn: {
-                nameEdt.setFocusable(false);
-                nameBtn.setVisibility(View.GONE);
-                mPresenter.updateUserName(UserInfo.getUser().getUserId(),
-                        nameEdt.getText().toString());
+                if (UserInfo.getUser() != null) {
+
+                    nameEdt.setFocusable(false);
+                    nameBtn.setVisibility(View.GONE);
+                    mPresenter.updateUserName(UserInfo.getUser().getUserId(),
+                            nameEdt.getText().toString());
+                } else {
+                    ToastUtils.show("please sign in first!");
+                }
                 break;
             }
             case R.id.setting_name_edt: {
@@ -128,15 +166,25 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     public void onStopTrackingTouch(SeekBar seekBar) {
         switch (seekBar.getId()) {
             case R.id.setting_cup_capacity_seek: {
-                mPresenter.updateUserCupCapacity(UserInfo.getUser().getUserId(),
-                        seekBar.getProgress());
+                if (UserInfo.getUser() != null) {
+
+                    mPresenter.updateUserCupCapacity(UserInfo.getUser().getUserId(),
+                            seekBar.getProgress());
+                } else {
+                    ToastUtils.show("please sign in first!");
+                }
                 break;
             }
             case R.id.setting_temperature_seek: {
-                mPresenter.updateMachineHoldingTemperature(
-                        UserInfo.getMachine().getMachineId(),
-                        seekBar.getProgress()
-                );
+                if (UserInfo.getMachine() != null) {
+
+                    mPresenter.updateMachineHoldingTemperature(
+                            UserInfo.getMachine().getMachineId(),
+                            seekBar.getProgress()
+                    );
+                } else {
+                    ToastUtils.show("please connect to machine first！");
+                }
                 break;
             }
         }

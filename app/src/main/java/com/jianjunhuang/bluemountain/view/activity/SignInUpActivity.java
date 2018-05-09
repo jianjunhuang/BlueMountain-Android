@@ -138,7 +138,7 @@ public class SignInUpActivity extends BaseActivity
         tipsTv.setText("登录成功");
         loginBtn.setStatus(LoadingCircleBtn.STATUS_LOAD_SUCCESS);
         setEdtEnable(true);
-        if (null == UserInfo.getUser().getMachineId()) {
+        if (null == UserInfo.getUser().getMachineId() || UserInfo.getMachine() == null) {
             Intent intent = new Intent(SignInUpActivity.this, ConnectActivity.class);
             startActivity(intent);
         }

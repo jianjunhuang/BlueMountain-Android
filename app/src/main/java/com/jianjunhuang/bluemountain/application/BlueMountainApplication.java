@@ -5,6 +5,7 @@ import android.app.Application;
 import com.demo.jianjunhuang.mvptools.integration.BaseApplication;
 import com.library.jianjunhuang.okhttputils.okhttputils.OkHttpUtils;
 import com.library.jianjunhuang.okhttputils.okhttputils.https.HttpCode;
+import com.tencent.bugly.Bugly;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.concurrent.TimeUnit;
@@ -22,5 +23,6 @@ public class BlueMountainApplication extends BaseApplication {
         builder.readTimeout(3000L, TimeUnit.MILLISECONDS);
         OkHttpUtils.initUtils(builder.build());
         HttpCode.initMap(this);
+        Bugly.init(getApplicationContext(),"8b1703a58a",false);
     }
 }

@@ -50,6 +50,11 @@ public class CoffeePresenter implements CoffeeContact.Presenter {
             public void onCoffeeFinish() {
                 mView.onCoffeeFinish();
             }
+
+            @Override
+            public void onMachineNoWater() {
+                mView.onMachineNoWater();
+            }
         });
     }
 

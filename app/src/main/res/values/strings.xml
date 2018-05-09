@@ -3,4 +3,5 @@
     <string name="sign_up">GO TO SIGN UP</string>
     <string name="sign_in">GO TO SIGN IN</string>
     <string name="connect_method">您还需要连接到咖啡机才能享受全部功能。请确保要连接的咖啡机已经进行过配置。\n\n连接方式：\n1. 输入咖啡机的 machineId \n2. 扫描咖啡机上，或朋友分享的二维码</string>
+    <string name="empty_tip">当前没有数据 ┑(￣Д ￣)┍</string>
 </resources>

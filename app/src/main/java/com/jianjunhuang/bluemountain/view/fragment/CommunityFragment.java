@@ -103,8 +103,14 @@ public class CommunityFragment extends BaseFragment implements CommunityContact.
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
-        mPresenter.getCommunity(UserInfo.getUser().getUserId(),
-                UserInfo.getMachine().getMachineId());
+        if (UserInfo.getUser() != null) {
+            if (UserInfo.getMachine() == null) {
+                ToastUtils.show("please connect coffee machine first!");
+                return;
+            }
+            mPresenter.getCommunity(UserInfo.getUser().getUserId(),
+                    UserInfo.getMachine().getMachineId());
+        }
         if (list.size() == 0) {
             emptyView.setTips(EmptyView.DEFALT_TIPS);
             emptyView.show();

@@ -156,6 +156,11 @@ public class CoffeeModel implements CoffeeContact.Model {
                                 getUsers(userId, machineId);
                                 break;
                             }
+                            case Action.NO_WATER: {
+                                Log.i(TAG, "onMessage: machine no water");
+                                mCallback.onMachineNoWater();
+                                break;
+                            }
                         }
                     }
 
@@ -194,7 +199,7 @@ public class CoffeeModel implements CoffeeContact.Model {
                 webSocket.send(userId);
             }
         };
-        timer.schedule(timerTask,0,30000);
+        timer.schedule(timerTask, 0, 30000);
     }
 
     @Override

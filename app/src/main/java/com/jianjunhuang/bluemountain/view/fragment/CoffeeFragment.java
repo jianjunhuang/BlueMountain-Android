@@ -92,7 +92,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
                         dialog.dismiss();
                     }
                 }).create();
-        alertDialog.setMessage("快去倒咖啡啦！");
+
     }
 
     @Override
@@ -106,7 +106,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
                     startActivity(intent);
                     return;
                 }
-                if (null == UserInfo.getUser().getMachineId()) {
+                if (null == UserInfo.getUser().getMachineId() || null == UserInfo.getMachine()) {
                     Intent intent = new Intent(getActivity(), ConnectActivity.class);
                     startActivity(intent);
                     return;
@@ -122,11 +122,23 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
-        mPresenter.connectByWebSocket(UserInfo.getUser().getUserId(),
-                UserInfo.getMachine().getMachineId());
-        mPresenter.getUsers(UserInfo.getUser().getUserId(),
-                UserInfo.getMachine().getMachineId());
-        mPresenter.getMachine(UserInfo.getMachine().getMachineId());
+        if (UserInfo.getUser() != null) {
+            if (UserInfo.getMachine() == null) {
+                ToastUtils.show("please connect coffee machine first!");
+                return;
+            }
+            mPresenter.connectByWebSocket(UserInfo.getUser().getUserId(),
+                    UserInfo.getMachine().getMachineId());
+            mPresenter.getUsers(UserInfo.getUser().getUserId(),
+                    UserInfo.getMachine().getMachineId());
+            mPresenter.getMachine(UserInfo.getMachine().getMachineId());
+        }
+        if (mList.size() == 0) {
+            emptyView.show();
+            emptyView.setTips(getResources().getString(R.string.empty_tip));
+        } else {
+            emptyView.hide();
+        }
     }
 
     @Override
@@ -138,6 +150,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     public void onGetUsersSuccess(List<User> users) {
         if (users.size() == 0) {
             emptyView.show();
+            emptyView.setTips(getResources().getString(R.string.empty_tip));
         } else {
             emptyView.hide();
         }
@@ -148,6 +161,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     @Override
     public void onGetUsersFailed(String reason) {
         ToastUtils.show(reason);
+        emptyView.setTips(reason);
         emptyView.show();
     }
 
@@ -202,6 +216,16 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         reserveInfoLl.setBackgroundResource(R.drawable.reserve_ordered_background);
         temperatureTv.setTextColor(Color.WHITE);
         statusTv.setTextColor(Color.WHITE);
+        showDialog("快去倒咖啡吧！");
+    }
+
+    @Override
+    public void onMachineNoWater() {
+        showDialog("咖啡机没有水啦！");
+    }
+
+    private void showDialog(String msg) {
         alertDialog.show();
+        alertDialog.setMessage(msg);
     }
 }

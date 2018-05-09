@@ -53,6 +53,7 @@ public class SignInUpModel implements SignInUpContact.Model {
                         Log.i(TAG, "onResponse: " + result.getData());
                         if (result.getStatus() == Result.SUCCESS) {
                             UserInfo.setUser(result.getData());
+
                             mCallback.onSignInSuccess();
                         } else {
                             mCallback.onSignInFailed(result.getReason());

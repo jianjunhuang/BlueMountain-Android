@@ -25,6 +25,7 @@ public interface CoffeeContact {
 
         void onCoffeeFinish();
 
+        void onMachineNoWater();
     }
 
     public interface Model extends IModel {
@@ -63,6 +64,8 @@ public interface CoffeeContact {
         void onOrderCoffeeFailed(String reason);
 
         void onCoffeeFinish();
+
+        void onMachineNoWater();
     }
 
 }

@@ -5,6 +5,7 @@ public class Action {
     public static final int UPDATE_USERS = 0;
     public static final int UPDATE_MACHINE = 1;
     public static final int GET_COFFEE = 4;
+    public static final int NO_WATER = 5;
 
     private int action;
 
