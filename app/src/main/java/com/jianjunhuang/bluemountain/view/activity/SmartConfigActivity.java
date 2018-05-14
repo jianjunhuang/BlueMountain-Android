@@ -1,13 +1,17 @@
 package com.jianjunhuang.bluemountain.view.activity;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -62,6 +66,17 @@ public class SmartConfigActivity extends BaseActivity {
                 switch (loadingCircleBtn.getStatus()) {
                     case LoadingCircleBtn.STATUS_LOAD_FAILED:
                     case LoadingCircleBtn.STATUS_DEFAULT:
+                        if (ContextCompat.checkSelfPermission(SmartConfigActivity.this,
+                                Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                                PackageManager.PERMISSION_GRANTED ||
+                                ContextCompat.checkSelfPermission(SmartConfigActivity.this,
+                                        Manifest.permission.ACCESS_FINE_LOCATION) !=
+                                        PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(SmartConfigActivity.this,
+                                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                            Manifest.permission.ACCESS_FINE_LOCATION}, 400);
+                            return;
+                        }
 
                         String apSsid = wifiSsidEdt.getText().toString();
                         String apPwd = wifiPwdEdt.getText().toString();
