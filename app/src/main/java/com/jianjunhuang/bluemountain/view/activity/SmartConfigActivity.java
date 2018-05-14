@@ -80,7 +80,7 @@ public class SmartConfigActivity extends BaseActivity {
                         break;
                     }
                     case LoadingCircleBtn.STATUS_LOAD_SUCCESS: {
-
+                        finish();
                         break;
                     }
                 }
@@ -196,6 +196,7 @@ public class SmartConfigActivity extends BaseActivity {
                         public void run() {
                             tipsTv.setText(sb.toString());
                             enableEdt(true);
+                            loadingCircleBtn.setStatus(LoadingCircleBtn.STATUS_LOAD_SUCCESS);
                         }
                     });
                 } else {

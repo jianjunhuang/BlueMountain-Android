@@ -216,9 +216,12 @@ public class SettingModel implements SettingContact.Model {
                                 }.getType());
                         if (result.getStatus() != Result.SUCCESS) {
                             mCallback.onDisconnectedFailed(result.getReason());
+
                         } else {
                             UserInfo.setUser(result.getData());
                             mCallback.onDisconnectedSuccess();
+                            UserInfo.setUser(null);
+                            UserInfo.setMachine(null);
                         }
                     }
                 });

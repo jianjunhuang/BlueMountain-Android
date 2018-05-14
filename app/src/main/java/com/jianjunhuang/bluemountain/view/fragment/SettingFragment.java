@@ -20,6 +20,7 @@ import com.jianjunhuang.bluemountain.model.bean.User;
 import com.jianjunhuang.bluemountain.presenter.SettingPresenter;
 import com.jianjunhuang.bluemountain.view.activity.ConnectActivity;
 import com.jianjunhuang.bluemountain.view.activity.SignInUpActivity;
+import com.jianjunhuang.bluemountain.view.activity.SmartConfigActivity;
 import com.jianjunhuang.bluemountain.view.widget.QRDialog;
 
 /**
@@ -38,6 +39,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     private Button inviteBtn;
     private Button disconnectBtn;
     private ImageButton nameBtn;
+    private Button smartConfigBtn;
 
     private QRDialog qrDialog;
 
@@ -59,6 +61,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         inviteBtn = findView(R.id.setting_invite_btn);
         disconnectBtn = findView(R.id.setting_disconnect_btn);
         nameBtn = findView(R.id.setting_name_btn);
+        smartConfigBtn = findView(R.id.setting_smart_config_btn);
         qrDialog = new QRDialog(getContext());
 
     }
@@ -71,11 +74,16 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         nameEdt.setOnClickListener(this);
         temperatureSb.setOnSeekBarChangeListener(this);
         capacitySb.setOnSeekBarChangeListener(this);
+        smartConfigBtn.setOnClickListener(this);
     }
 
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
+        update();
+    }
+
+    private void update() {
         mPresenter.getMachineInfo();
         mPresenter.getUserInfo();
         if (UserInfo.getUser() == null) {
@@ -88,6 +96,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             }
         }
     }
+
 
     @Override
     public void onClick(View v) {
@@ -138,6 +147,11 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
             case R.id.setting_name_edt: {
                 nameEdt.setFocusableInTouchMode(true);
                 nameBtn.setVisibility(View.VISIBLE);
+                break;
+            }
+            case R.id.setting_smart_config_btn: {
+                Intent intent = new Intent(getActivity(), SmartConfigActivity.class);
+                startActivity(intent);
                 break;
             }
         }
@@ -264,6 +278,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onDisconnectedSuccess() {
         ToastUtils.show("断开连接成功");
+        update();
     }
 
     @Override

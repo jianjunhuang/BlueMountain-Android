@@ -106,6 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
+            android:min="60"
+            android:max="75"
             android:paddingTop="8dp" />
 
         <Button
@@ -126,6 +128,17 @@
             android:layout_marginTop="32dp"
             android:background="#f44336"
             android:text="Disconnect"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/setting_smart_config_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/colorBlue"
+            android:text="config machine"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="15sp" />

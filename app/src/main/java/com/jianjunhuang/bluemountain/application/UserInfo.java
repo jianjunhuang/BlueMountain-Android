@@ -44,6 +44,8 @@ public class UserInfo {
                 Gson gson = new Gson();
                 SPUtils.instance(Config.SP_USER_INFO_FILE)
                         .store(Config.SP_USER_INFO_KEY, gson.toJson(user));
+            } else {
+                SPUtils.instance(Config.SP_USER_INFO_FILE).clearAll();
             }
         }
     }
@@ -55,6 +57,8 @@ public class UserInfo {
                 Gson gson = new Gson();
                 SPUtils.instance(Config.SP_MACHINE_INFO_FILE)
                         .store(Config.SP_MACHINE_INFO_KEY, gson.toJson(machine));
+            } else {
+                SPUtils.instance(Config.SP_MACHINE_INFO_FILE).clearAll();
             }
         }
     }
