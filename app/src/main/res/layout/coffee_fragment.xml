@@ -18,19 +18,19 @@
         android:id="@+id/coffee_reserve_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         app:layout_anchor="@id/coffee_info_rv"
         app:layout_anchorGravity="bottom|right"
         app:layout_behavior="com.jianjunhuang.bluemountain.view.widget.ScrollAwareBehavior">
 
         <LinearLayout
             android:id="@+id/coffee_reserve_info_ll"
-            android:layout_width="180dp"
-            android:layout_height="56dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/reserve_background"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="60dp">
 
             <TextView
                 android:id="@+id/coffee_reserve_temperature_tv"
@@ -41,6 +41,17 @@
                 android:drawablePadding="4dp"
                 android:gravity="center"
                 android:text="加热: " />
+
+            <TextView
+                android:id="@+id/coffee_reserve_insulation_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@drawable/ic_whatshot_black_24dp"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:paddingRight="28dp"
+                android:text="保温: " />
 
             <TextView
                 android:id="@+id/coffee_reserve_status_tv"
@@ -58,7 +69,9 @@
             android:id="@+id/coffee_reserve_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             android:layout_alignRight="@id/coffee_reserve_info_ll"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_free_breakfast_black_24dp"
             app:fabSize="normal" />
 

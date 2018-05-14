@@ -46,6 +46,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     private TextView temperatureTv;
     private TextView statusTv;
     private EmptyView emptyView;
+    private TextView insulationTv;
 
     private CoffeePresenter mPresenter;
     private CoffeeAdapter mAdapter;
@@ -67,6 +68,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         temperatureTv = findView(R.id.coffee_reserve_temperature_tv);
         statusTv = findView(R.id.coffee_reserve_status_tv);
         emptyView = new EmptyView(findView(R.id.empty_layout));
+        insulationTv = findView(R.id.coffee_reserve_insulation_tv);
 
         LinearLayoutManager mManager = new LinearLayoutManager(getContext());
         mManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -167,7 +169,8 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
 
     @Override
     public void onGetMachineSuccess(Machine machine) {
-        temperatureTv.setText("加热：" + machine.getTemperature());
+        temperatureTv.setText("加热: " + machine.getTemperature() + " °C");
+        insulationTv.setText("保温: " + machine.getInsulation() + " °C");
         switch (machine.getStatus()) {
             case Machine.STATUS_DISCONNECTED: {
                 statusTv.setText("断开连接");
@@ -175,12 +178,12 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
             }
             case Machine.STATUS_KEEP_WARMING: {
                 statusTv.setText("正在保温");
-                temperatureTv.setText("保温：" + machine.getInsulation());
+//                temperatureTv.setText("保温：" + machine.getInsulation());
                 break;
             }
             case Machine.STATUS_MAKING_COFFEE: {
                 statusTv.setText("正在煮咖啡");
-                temperatureTv.setText("加热：" + machine.getTemperature());
+//                temperatureTv.setText("加热：" + machine.getTemperature());
                 break;
             }
             case Machine.STATUS_NO_WATER: {
@@ -203,6 +206,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
     public void onOrderCoffeeSuccess() {
         reserveInfoLl.setBackgroundResource(R.drawable.reserve_making_background);
         temperatureTv.setTextColor(Color.WHITE);
+        insulationTv.setTextColor(Color.WHITE);
         statusTv.setTextColor(Color.WHITE);
     }
 
@@ -216,6 +220,7 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         reserveInfoLl.setBackgroundResource(R.drawable.reserve_ordered_background);
         temperatureTv.setTextColor(Color.WHITE);
         statusTv.setTextColor(Color.WHITE);
+        insulationTv.setTextColor(Color.WHITE);
         showDialog("快去倒咖啡吧！");
     }
 

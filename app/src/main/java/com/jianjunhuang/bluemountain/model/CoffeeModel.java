@@ -39,6 +39,7 @@ import okio.ByteString;
 
 public class CoffeeModel implements CoffeeContact.Model {
 
+    private WebSocket mWebSocket = null;
     private CoffeeContact.Callback mCallback;
     private Gson gson = new GsonBuilder().
             registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
@@ -119,6 +120,9 @@ public class CoffeeModel implements CoffeeContact.Model {
 
     @Override
     public void connectByWebSocket(final String userId, final String machineId) {
+        if (mWebSocket != null) {
+            return;
+        }
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("ws://10.11.3.213:8080/websocket/socketServer")
@@ -126,7 +130,7 @@ public class CoffeeModel implements CoffeeContact.Model {
                 .header("type", "phone")
                 .header("userId", userId)
                 .build();
-        final WebSocket webSocket = client
+        mWebSocket = client
                 .newWebSocket(request, new WebSocketListener() {
                     @Override
                     public void onOpen(WebSocket webSocket, Response response) {
@@ -179,12 +183,14 @@ public class CoffeeModel implements CoffeeContact.Model {
                     @Override
                     public void onClosed(WebSocket webSocket, int code, String reason) {
                         super.onClosed(webSocket, code, reason);
+                        mWebSocket = null;
                         Log.i(TAG, "onClosed: ");
                     }
 
                     @Override
                     public void onFailure(WebSocket webSocket, Throwable t, @Nullable Response response) {
                         super.onFailure(webSocket, t, response);
+                        mWebSocket = null;
                         Log.i(TAG, "onFailure: ");
                     }
                 });
@@ -196,7 +202,7 @@ public class CoffeeModel implements CoffeeContact.Model {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                webSocket.send(userId);
+                mWebSocket.send(userId);
             }
         };
         timer.schedule(timerTask, 0, 30000);
