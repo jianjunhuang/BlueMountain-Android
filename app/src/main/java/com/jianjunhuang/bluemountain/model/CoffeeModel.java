@@ -202,7 +202,9 @@ public class CoffeeModel implements CoffeeContact.Model {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                mWebSocket.send(userId);
+                if (mWebSocket != null) {
+                    mWebSocket.send(userId);
+                }
             }
         };
         timer.schedule(timerTask, 0, 30000);

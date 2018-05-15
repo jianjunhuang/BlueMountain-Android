@@ -76,6 +76,18 @@ public class CoffeeFragment extends BaseFragment implements CoffeeContact.View {
         mAdapter = new CoffeeAdapter(getContext(), mList, R.layout.coffee_item_layout);
         userRv.setAdapter(mAdapter);
         initAlertDialog();
+
+
+    }
+
+    private void setStatusView() {
+        User user = UserInfo.getUser();
+        if (null == user) {
+            return;
+        }
+        switch (user.getStatus()) {
+
+        }
     }
 
     private static final String TAG = "CoffeeFragment";
